@@ -1,6 +1,7 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include <XmlRpcCpp.h>
+#include <iostream>
 
 
 MainWindow::MainWindow(QWidget *parent)
@@ -70,8 +71,9 @@ QString MainWindow::callRPCCatString(std::string catcall)
     {
             xmlrpc_c::clientSimple myClient;
             xmlrpc_c::value result;
-
-             myClient.call(serverUrl, "rig.cat_string",  &result);
+            xmlrpc_c::paramList parms;
+            parms.add(xmlrpc_c::value_string(catcall));
+             myClient.call(serverUrl, "rig.cat_string", parms, &result);
              std::string const retval((xmlrpc_c::value_string(result)));
              return QString::fromStdString(retval);
 
@@ -92,4 +94,11 @@ int MainWindow::getMeter(std::string meterType)
      valueStr = retval.substr(3,3);
      return stoi(valueStr);
 }
+
+ void debugMsg(std::string msg)
+ {
+     //if (! QT_DEBUG) {return;}
+     std::cout << msg;
+
+};
 

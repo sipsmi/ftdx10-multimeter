@@ -10,8 +10,11 @@
 #include <termios.h> // Contains POSIX terminal control definitions
 #include <unistd.h> // write(), read(), close()
 
+// simple XML client
 #include <xmlrpc-c/base.hpp>
 #include <xmlrpc-c/client_simple.hpp>
+
+// general includes
 #include <string>
 
 
@@ -29,17 +32,15 @@ public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
  //   int serial_port =0;
-    void updatePoll(); // NEW to read the file and set to label
-    QString callRPC(std::string call); // NEW to read the file and set to label
-    QString callRPCCatString(std::string catcall); // NEW to read the file and set to label
-
-    int getMeter(std::string meterType);
+    void updatePoll(); //
+    QString callRPC(std::string call); // CAT string
+    QString callRPCCatString(std::string catcall); // CAT string
+    int getMeter(std::string meterType);  // Call the CAT but specific to meter 255 extractio
+    void debugMsg(std::string msg);
 
 private slots:
     void on_actionQuit_triggered();
-
     void on_actionUpdate_Frequency_triggered();
-
     void TimerSlot(); // NEW slot
 
 private:
@@ -53,9 +54,7 @@ private:
     const std::string catCodeReadIDD = "RM7;";
     const std::string catCodeReadCOMP = "RM3;";
     const std::string catCodeReadS = "RM1;";
-
-
-
+    const bool tdebug = true;
 
 
 };
