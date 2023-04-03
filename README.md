@@ -1,5 +1,5 @@
 # ftdx10-multimeter
-Display multiple meters simultaCancel changesneously from Yaesu CAT interface
+Display multiple meters simultaneously from Yaesu CAT interface
 
 ## interface
 Depends on FLRIG XML RPC
